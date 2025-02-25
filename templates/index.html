@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sentiment Analyzing</title>
+    <!-- fonts link -->
+    <link
+    href="https://cdn.jsdelivr.net/npm/remixicon@4.5.0/fonts/remixicon.css"
+    rel="stylesheet"/>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Nunito+Sans:ital,opsz,wght@0,6..12,200..1000;1,6..12,200..1000&family=Smooch+Sans&family=Yatra+One&display=swap" rel="stylesheet">
+    <!-- CSS Style -->
+    <link rel="stylesheet" href="{{url_for('static',filename='style.css')}}">
+</head>
+
+<body>
+        <!-- Our website main page -->
+    <div class="main">
+
+
+
+        <!-- nav bar -->
+        <nav>
+            <!-- Logo -->
+            <div class="title">
+                <div class="icon"></div>
+                <h1 class="yatra-one-regular">View Review</h1>
+            </div>
+            <!-- search box with drop-down, input and search button -->
+            <div class="search-box">
+                <!-- dropdown -->
+                <div class="options">
+                    <i class="ri-arrow-drop-down-fill drop-down-icon"></i>   <!-- icon -->
+                    <h2>Choose</h2>
+                    <div class="drop-down-menu">
+                        <ul>
+                            <li class="content youtube"><h1>Youtube</h1></li>
+                            <li class="content movie"><h1>Movies & Show</h1></li>
+                            <li class="content random"><h1>Random</h1></li>
+                            <li class="content none"><h1>None</h1></li>
+                        </ul>
+                    </div>
+                    
+                </div>
+
+                <input type="text" id="search-input" placeholder="Text here...">
+                <button class="search-btn"><i class="ri-search-line search-icon"></i></button>
+            </div>
+            <!-- about button  -->
+            <div class="about-btn">About</div>
+        </nav>
+
+
+        <!-- About slider -->
+        <div class="slider">
+            <div class="close"> <i class="ri-close-large-line close-icon"></i></div>
+            
+            <div class="about-text">
+                <details>
+                    <summary>About</summary>
+                    
+                </details>
+                <h1>View Review</h1>
+                <h6>Your own site to check!</h6>
+                <p class="
+                nunito-sans-make">Hey! Welcome to <b>View Review</b>: comments and Review Analyzer App!
+                <br><br>
+                Just select the genre from the dropdown and enter your request to see public response to the particular.
+                if option is youtube: copy a youtube link and search 
+                if it's movie : 
+                if its random: enter your own list of comment to analyse!
+                <br><br><i>Safe Siting!!</i> 
+                </p>
+            </div>
+        </div>
+
+        <!-- pie,review -->
+        <div class="results">
+            <div class="text-res"><h2>R</h2>
+            <h2>e</h2>
+            <h2>s</h2>
+            <h2>u</h2>
+            <h2>l</h2>
+            <h2>t</h2>
+            <h2>s</h2></div>
+            <div class="chart"><img id="chart-img" src="" alt="Sentiment Pie Chart">
+            </div>
+            <div class="markers">
+                <table id="sentimentTable" border="1">
+                    <tr>
+                        <th>Positive</th>
+                        <th>Negative</th>
+                        <th>Neutral</th>
+                    </tr>
+                    <tr>
+                        <td id="posVal">-</td>
+                        <td id="negVal">-</td>
+                        <td id="neuVal">-</td>
+                    </tr>
+                </table>
+                
+            </div>
+            <div class="scale">
+                <h2>Wanna increase the count of comments?</h2>
+                <input type="range" id="slider" min="10" max="100" value="10" oninput="updateValue(this.value)">
+            <span id="sliderValue">10</span>
+            </div>
+            
+
+        </div>
+
+        <div class="error-message">
+            <div class="error-img-container">
+                <img src="{{url_for('static',filename='error.jpeg')}}" alt="Error" class="error-img">
+            </div>
+            
+            <p id="error-text">An error occurred. Please try again.</p>
+            <button class="error-btn" onclick="closeError()">Close</button>
+        </div>
+        <div class="add"><p></p></div>
+    </div>
+    
+    
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            let iconDiv = document.querySelector(".icon");
+            if (iconDiv) {  // Ensure iconDiv exists before applying styles
+                let logoUrl = "{{ url_for('static', filename='vrLOGO.png') }}";
+                iconDiv.style.backgroundImage = "url('" + logoUrl + "')";
+            }
+        });
+    </script>
+    
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js" integrity="sha512-7eHRwcbYkK4d9g/6tD/mhkf++eoTHwpNM9woBxtPUBWm67zeAfFC+HrdoE2GanKeocly/VxeLvIqwvCdk7qScg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="{{url_for('static',filename='script.js')}}"></script>
+</body>
+</html>

@@ -51,6 +51,7 @@ def process():
         if(max_comments>0):
             global_input_text=sentence_generator(max_comments)
         pos, neg, neu = statistical_analyzer(global_input_text)
+        response["comments"]=global_input_text
 
     else:
         response = {"error": "Invalid option"}

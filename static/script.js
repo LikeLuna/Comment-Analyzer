@@ -48,6 +48,7 @@ let placeholders = {
     "Youtube": "Place the YouTube link here...",
     "Movies & Show": "Under Process...",
     "Random": "Enter comments separated by ; ...",
+    
 };
 // funtion to change input placeholder according to dropdown's option
 let placehold = function () {
@@ -71,9 +72,14 @@ function handleDropdownClick(event) {
         console.log(text);
 
         let scaleElements = document.getElementsByClassName("scale");
+        let addDiv=document.getElementsByClassName("add")
         Array.from(scaleElements).forEach(el => {
             el.style.display = (text.toLowerCase() === "youtube") ? "block" : "none";
         });
+
+        Array.from(addDiv).forEach(el=>{
+            el.style.display=(text.toLowerCase()==="random")?"block":"none";
+        })
     }
 }
 
@@ -81,19 +87,13 @@ function handleDropdownClick(event) {
 content.forEach(li => li.addEventListener("click", handleDropdownClick));
 
 
-
+// slider for youtube
 function updateValue(value) {
     document.getElementById("sliderValue").textContent = value; // Update displayed value
-
-    // Call fetchComments() to get updated comments
-    fetchComments(value);
 }
-
+//slider for random
 function updateValue2(value) {
     document.getElementById("sliderValue2").textContent = value; // Update displayed value
-
-    // Call fetchComments() to get updated comments
-    fetchComments(value);
 }
 // Logo setting up 
 let iconDiv = document.querySelector(".icon");
@@ -105,6 +105,18 @@ function updateSentimentTable(pos, neg, neu) {
     document.getElementById("posVal").innerText = pos;
     document.getElementById("negVal").innerText = neg;
     document.getElementById("neuVal").innerText = neu;
+}
+function displayComments(comments){
+    let commentsDiv=document.getElementById("commentsSection");
+    commentsDiv.innerHTML="";
+    comments.forEach(comment=>{
+        let p=document.createElement("p");
+        p.textContent=comment
+        commentsDiv.appendChild(p)
+        let br = document.createElement("br");
+        commentsDiv.appendChild(br);
+    })
+    
 }
 
 
@@ -131,6 +143,10 @@ function handleSearch() {
     .then(response => response.json())
     .then(data => {
         console.log("Received list:", data.lines);
+        if(data.comments){
+            console.log("comments:",data.comments);
+            displayComments(data.comments)
+        }
         if (data.error) {
             alert("Error: " + data.error);
             return;
@@ -176,12 +192,5 @@ function closeError() {
     document.querySelector(".error-message").style.display = "none";
 }
 
-// fetch("/get_latest")
-//     .then(response => response.json())
-//     .then(data => {
-//         console.log("Latest input:", data.latest_input);
-//         console.log("Selected option:", data.selected_option);
-//     })
-//     .catch(error => console.error("Error:", error));
 
 

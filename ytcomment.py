@@ -23,9 +23,9 @@ from dotenv import load_dotenv
 import os
 import re
 
-load_dotenv(dotenv_path=".env")
-API_KEY=os.getenv("API_KEY") # place yours here
-
+dotenv_path = os.path.abspath("env/.env")  # Adjust as needed
+load_dotenv(dotenv_path=dotenv_path)
+API_KEY = os.getenv("API_KEY")
 
 def check_api_key():
     try:
@@ -45,8 +45,7 @@ def check_api_key():
 # check_api_key()
 
 
-load_dotenv()
-API_KEY=os.getenv("API_KEY")
+
 #Replace with your actual YouTube API key
 
 def extract_video_id(youtube_url):

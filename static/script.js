@@ -89,6 +89,12 @@ function updateValue(value) {
     fetchComments(value);
 }
 
+function updateValue2(value) {
+    document.getElementById("sliderValue2").textContent = value; // Update displayed value
+
+    // Call fetchComments() to get updated comments
+    fetchComments(value);
+}
 // Logo setting up 
 let iconDiv = document.querySelector(".icon");
 iconDiv.style.backgroundSize = "cover";
@@ -109,7 +115,7 @@ function handleSearch() {
     let inputText = inputSearch.value;
     let choice = displayOpt.textContent;
     let numComments = document.getElementById("slider").value;
-
+    let numComments2 = document.getElementById("slider2").value;
     if (!inputText) {
         alert("Please enter text or a YouTube URL.");
         return;
@@ -120,7 +126,7 @@ function handleSearch() {
     fetch("/process", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ text: inputText, option: choice, max_results: parseInt(numComments) })
+        body: JSON.stringify({ text: inputText, option: choice, max_results: parseInt(numComments) ,max_comments:parseInt(numComments2)})
     })
     .then(response => response.json())
     .then(data => {

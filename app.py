@@ -27,6 +27,7 @@ def process():
     input_text=data.get("text","").strip()
     global_option=data.get("option","")
     max_results = int(data.get("max_results", 10)) 
+    max_comments=int(data.get("max_comments",0))
 
     print(f"Received Data: {data}")  # Debug print
     print(f"Text:{global_input_text},Option: {global_option}")
@@ -47,7 +48,8 @@ def process():
     
     
     elif global_option.lower() == "random":
-        # global_input_text=sentence_generator(max_results)
+        if(max_comments>0):
+            global_input_text=sentence_generator(max_comments)
         pos, neg, neu = statistical_analyzer(global_input_text)
 
     else:

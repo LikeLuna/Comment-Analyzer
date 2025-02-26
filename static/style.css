@@ -456,3 +456,21 @@ button:hover {
     right:4%;
     top:20%;
 }
+
+.scale2{
+    width:40%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    position: absolute;
+    bottom:0%;
+    left:4%;
+
+}
+.scale2 h2{
+    
+    font-size: 90%;
+    margin: 10px;
+    text-align: center;
+}
